@@ -21,6 +21,7 @@ compilers:
         cxx: /opt/cray/pe/craype/2.7.17/bin/CC
         f77: /opt/cray/pe/craype/2.7.17/bin/ftn
         fc: /opt/cray/pe/craype/2.7.17/bin/ftn
+      flags: {}
       operating_system: sles15
       target: any
       modules:
@@ -31,6 +32,7 @@ compilers:
       environment:
         prepend_path:
           LD_LIBRARY_PATH: /opt/cray/pe/pmi/6.1.3/lib
+          PKG_CONFIG_PATH: /usr/lib64/pkgconfig
       extra_rpaths: []
   - compiler:
       spec: cce@14.0.2
@@ -52,6 +54,7 @@ compilers:
           RFE_811452_DISABLE: '1'
         append_path:
           LD_LIBRARY_PATH: /opt/cray/pe/gcc-libs:/opt/cray/libfabric/1.15.0.0/lib64
+          PKG_CONFIG_PATH: /usr/lib64/pkgconfig
         prepend_path:
           LD_LIBRARY_PATH: /opt/cray/pe/pmi/6.1.3/lib
       extra_rpaths:
