@@ -10,9 +10,18 @@ packages:
       version: []
     cray-mpich:
       externals:
-      - spec: cray-mpich@8.1.25
+      - spec: cray-mpich@8.1.25%gcc
+        prefix: /opt/cray/pe/mpich/8.1.25/ofi/gnu/9.1
         modules:
-        - cray-mpich/8.1.25
+        - libfabric/1.15.2.0
+      - spec: cray-mpich@8.1.25%cce
+        prefix: /opt/cray/pe/mpich/8.1.25/ofi/cray/10.0
+        modules:
+        - libfabric/1.15.2.0
+      - spec: cray-mpich@8.1.25%clang
+        prefix: /opt/cray/pe/mpich/8.1.25/ofi/amd/5.0
+        modules:
+        - libfabric/1.15.2.0
       buildable: false
     cray-libsci:
       externals:
