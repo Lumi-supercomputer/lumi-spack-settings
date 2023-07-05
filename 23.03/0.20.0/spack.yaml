@@ -33,6 +33,12 @@ spack:
     - hpl+openmp ^cray-libsci
     - openblas threads=none
     - openblas threads=openmp
+    - blis threads=none
+    - blis threads=openmp
+    - amdblis threads=none
+    - amdblis threads=openmp
+    - libflame threads=none ^blis 
+    - amdlibflame threads=none ^amdblis
     - netlib-scalapack ^openblas
     - lammps+class2+colloid+compress+coreshell+dipole+granular+kspace+manybody+mc+misc+molecule+mpi+mpiio+openmp+peri+poems+python+qeq+replica+rigid+shock+snap+spin+srd+voronoi
     - quantum-espresso+epw+libxc+mpi+openmp+scalapack hdf5=serial ^openblas ^netlib-scalapack
@@ -44,7 +50,7 @@ spack:
     - cdo
     - nco
     - cmor
-    - eccodes+aec+fortran+memfs+netcdf+openmp+python+tools samples=none
+    - eccodes+aec+fortran+memfs+netcdf+openmp+tools samples=none
     - darshan-runtime
     - darshan-util
     - trilinos ~cuda~wrapper ^superlu-dist+rocm amdgpu_target==gfx90a
@@ -59,14 +65,16 @@ spack:
     - go
     - googletest
     - hpctoolkit+rocm
-    - scorep
-    - scalasca
+#    - scorep fails to build
+#    - scalasca fails to build
     - cp2k+cosma+plumed+spglib+elpa ^elpa@2022.11.001~rocm
     - elpa
     - octave+fftw+hdf5+zlib ^cray-mpich
     - jasper
     - hpl~openmp ^openblas
     - wannier90
+    - amrex ++rocm~~cuda amdgpu_target=gfx90a
+    - ginkgo ++rocm~~cuda amdgpu_target=gfx90a
   - gcc12_packages:
     - hpl+openmp
     - quantum-espresso+epw+libxc+mpi+openmp+scalapack hdf5=serial ^amdblis ^amdfftw
@@ -75,9 +83,9 @@ spack:
     - boost+filesystem+date_time+math+signals+graph+multithreaded+shared+thread+timer
       cxxstd=17
   - cray_packages:
-    - hpl+openmp
+#    - hpl+openmp ^cray-libsci
     - chai ~benchmarks~examples~tests+rocm~cuda amdgpu_target=gfx90a
-    - umpire +shared+rocm~cuda amdgpu_target=gfx90a
+    - umpire@6.0.0 +shared+rocm~cuda amdgpu_target=gfx90a
     - raja ~exercises~examples~tests+rocm~cuda~openmp amdgpu_target=gfx90a
     - kokkos +rocm~cuda~wrapper~openmp amdgpu_target=gfx90a
   - core_specs:
@@ -128,8 +136,8 @@ spack:
       - PKG_CONFIG_PATH
       share/pkgconfig:
       - PKG_CONFIG_PATH
-      ? ''
-      : - CMAKE_PREFIX_PATH
+      '':
+      - CMAKE_PREFIX_PATH
     default:
       enable:
       - tcl
