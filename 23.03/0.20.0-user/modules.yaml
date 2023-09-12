@@ -29,4 +29,49 @@ modules:
       hash_length: 3
       projections:
         all: '{name}/{version}-{compiler.name}'
+      all:
+        environment:
+          set:
+            ${PACKAGE}_INSTALL_ROOT: ${PREFIX}
+      blacklist:
+      - cray-mpich
+      - cray-libsci
+      openblas:
+        suffixes:
+          openblas threads=openmp: omp
+          openblas threads=pthreads: pthreads
+          openblas threads=none: serial
+      hpl:
+        suffixes:
+          hpl ^openblas: openblas
+      zstd:
+        suffixes:
+          zstd ~programs: nobin
+      binutils:
+        suffixes:
+          binutils +gold: gold
+      xz:
+        suffixes:
+          xz +pic: pic
+      elfutils:
+        suffixes:
+          elfutils +bzip2: compress
+      trilinos:
+        suffixes:
+          trilinos +rocm: gpu
+      kokkos:
+        suffixes:
+          kokkos +rocm: gpu
+      chai:
+        suffixes:
+          chai +rocm: gpu
+      raja:
+        suffixes:
+          raja +rocm: gpu
+      umpire:
+        suffixes:
+          umpire +rocm: gpu
+      gromacs:
+        suffixes:
+          gromacs +plumed: plumed
 
