@@ -17,7 +17,7 @@ packages:
       prefix: /opt/cray/pe/mpich/8.1.27/ofi/cray/14.0
       modules:
       - libfabric/1.15.2.0
-    - spec: cray-mpich@8.1.27%clang
+    - spec: cray-mpich@8.1.27%rocmcc
       prefix: /opt/cray/pe/mpich/8.1.27/ofi/amd/5.0
       modules:
       - libfabric/1.15.2.0
@@ -32,7 +32,7 @@ packages:
       prefix: /opt/cray/pe/libsci/23.09.1.1/cray/12.0/x86_64
       modules:
       - cray-libsci/23.09.1.1
-    - spec: cray-libsci@23.09.1.1%clang
+    - spec: cray-libsci@23.09.1.1%rocmcc
       prefix: /opt/cray/pe/libsci/23.09.1.1/AMD/5.0/x86_64
       modules:
       - cray-libsci/23.09.1.1
