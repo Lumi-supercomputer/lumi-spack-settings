@@ -110,12 +110,12 @@ compilers:
       extra_rpaths:
       - /opt/cray/pe/gcc-libs      
   - compiler:
-        spec: clang@14.0.0-rocm5.2.3
+        spec: rocmcc@5.6.1
         paths:
-          cc: /opt/rocm-5.2.3/bin/amdclang
-          cxx: /opt/rocm-5.2.3/bin/amdclang++
-          f77: /opt/rocm-5.2.3/bin/amdflang
-          fc: /opt/rocm-5.2.3/bin/amdflang
+          cc:  /appl/lumi/SW/CrayEnv/EB/rocm/5.6.1/bin/amdclang
+          cxx: /appl/lumi/SW/CrayEnv/EB/rocm/5.6.1/bin/amdclang++
+          f77: /appl/lumi/SW/CrayEnv/EB/rocm/5.6.1/bin/amdflang
+          fc:  /appl/lumi/SW/CrayEnv/EB/rocm/5.6.1/bin/amdflang
         flags: {}
         operating_system: sles15
         target: any
@@ -127,8 +127,9 @@ compilers:
             LD_LIBRARY_PATH: /opt/cray/pe/gcc-libs
           prepend_path:
             LD_LIBRARY_PATH: /opt/cray/pe/pmi/6.1.12/lib
-            LIBRARY_PATH: /opt/rocm-5.2.3/lib:/opt/rocm-5.2.3/lib64
+            LIBRARY_PATH:  /appl/lumi/SW/CrayEnv/EB/rocm/5.6.1/lib:/appl/lumi/SW/CrayEnv/EB/rocm/5.6.1/lib64
         extra_rpaths:
-        - /opt/rocm-5.2.3/lib
-        - /opt/rocm-5.2.3/lib64
+        - /appl/lumi/SW/CrayEnv/EB/rocm/5.6.1/lib
+        - /appl/lumi/SW/CrayEnv/EB/rocm/5.6.1/lib64
         - /opt/cray/pe/gcc-libs
+
