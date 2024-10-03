@@ -1,8 +1,8 @@
 spack:
   include:
-  - /appl/lumi/spack/etc/23.09/0.21.0/config.yaml
-  - /appl/lumi/spack/etc/23.09/0.21.0/packages.yaml
-  - /appl/lumi/spack/etc/23.09/0.21.0/compilers.yaml
+  - /appl/lumi/spack/etc/24.03/0.22.0/config.yaml
+  - /appl/lumi/spack/etc/24.03/0.22.0/packages.yaml
+  - /appl/lumi/spack/etc/24.03/0.22.0/compilers.yaml
   definitions:
   - core_compiler: ['%gcc@7.5.0']
   - gcc_compiler: ['%gcc@12.2.0']
