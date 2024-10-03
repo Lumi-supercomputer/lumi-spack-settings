@@ -1,10 +1,13 @@
 config:
-    build_jobs: 48
-    install_missing_compilers: false
+    build_jobs: 32
     install_tree:
-      root: /appl/lumi/spack/23.09/0.21.0/opt/spack
+      root: $SPACK_USER_PREFIX/24.03/0.22.0
       projections:
         all: '{name}-{version}-{hash:7}'
+    source_cache: $SPACK_USER_PREFIX/24.03/0.22.0/cache
+    misc_cache: $SPACK_USER_PREFIX/24.03/0.22.0/cache
+    install_missing_compilers: false
+    suppress_gpg_warnings: true
     build_language: C
     db_lock_timeout: 10
 
