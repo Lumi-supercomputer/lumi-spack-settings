@@ -15,6 +15,36 @@ compilers:
           PKG_CONFIG_PATH: /usr/lib64/pkgconfig
       extra_rpaths: []
   - compiler:
+      spec: gcc@12.3.0
+      paths:
+        cc: /usr/bin/gcc-12
+        cxx: /usr/bin/g++-12
+        f77: /usr/bin/gfortran-12
+        fc: /usr/bin/gfortran-12
+      flags: {}
+      operating_system: sles15
+      target: any
+      modules: []
+      environment:
+        append_path:
+          PKG_CONFIG_PATH: /usr/lib64/pkgconfig
+      extra_rpaths: []
+  - compiler:
+      spec: gcc@13.2.1
+      paths:
+        cc: /usr/bin/gcc-13
+        cxx: /usr/bin/g++-13
+        f77: /usr/bin/gfortran-13
+        fc: /usr/bin/gfortran-13
+      flags: {}
+      operating_system: sles15
+      target: any
+      modules: []
+      environment:
+        append_path:
+          PKG_CONFIG_PATH: /usr/lib64/pkgconfig
+      extra_rpaths: []
+  - compiler:
       spec: gcc@11.2.0
       paths:
         cc: /opt/cray/pe/gcc/11.2.0/bin/gcc
@@ -108,14 +138,35 @@ compilers:
           LD_LIBRARY_PATH: /opt/cray/pe/gcc-libs
           PKG_CONFIG_PATH: /usr/lib64/pkgconfig
       extra_rpaths:
-      - /opt/cray/pe/gcc-libs      
+      - /opt/cray/pe/gcc-libs
   - compiler:
-        spec: rocmcc@5.6.1
+      spec: cce@17.0.1
+      paths:
+        cc: /opt/cray/pe/cce/17.0.1/bin/craycc
+        cxx: /opt/cray/pe/cce/17.0.1/bin/crayCC
+        f77: /opt/cray/pe/cce/17.0.1/bin/crayftn
+        fc: /opt/cray/pe/cce/17.0.1/bin/crayftn
+      flags: {}
+      operating_system: sles15
+      target: any
+      modules: []
+      environment:
+        set:
+          RFE_811452_DISABLE: '1'
+        prepend_path:
+          LD_LIBRARY_PATH: /opt/cray/pe/pmi/6.1.12/lib
+        append_path:
+          LD_LIBRARY_PATH: /opt/cray/pe/gcc-libs
+          PKG_CONFIG_PATH: /usr/lib64/pkgconfig
+      extra_rpaths:
+      - /opt/cray/pe/gcc-libs
+  - compiler:
+        spec: amdclang@6.0.3
         paths:
-          cc:  /appl/lumi/SW/CrayEnv/EB/rocm/5.6.1/bin/amdclang
-          cxx: /appl/lumi/SW/CrayEnv/EB/rocm/5.6.1/bin/amdclang++
-          f77: /appl/lumi/SW/CrayEnv/EB/rocm/5.6.1/bin/amdflang
-          fc:  /appl/lumi/SW/CrayEnv/EB/rocm/5.6.1/bin/amdflang
+          cc:  /opt/rocm-6.0.3/bin/amdclang
+          cxx: /opt/rocm-6.0.3/bin/amdclang++
+          f77: /opt/rocm-6.0.3/bin/amdflang
+          fc:  /opt/rocm-6.0.3/bin/amdflang
         flags: {}
         operating_system: sles15
         target: any
@@ -123,13 +174,12 @@ compilers:
         environment:
           set:
             RFE_811452_DISABLE: '1'
-          append_path:
-            LD_LIBRARY_PATH: /opt/cray/pe/gcc-libs
+            CRAY_ROCM_INCLUDE_OPTS: '-I/opt/rocm-6.0.3/include -I/opt/rocm-6.0.3/include/rocprofiler -I/opt/rocm-6.0.3/include/roctracer -I/opt/rocm-6.0.3/include/hip -D__HIP_PLATFORM_AMD__'
+            CRAY_ROCM_POST_LINK_OPTS: ' -L/opt/rocm-6.0.3/lib -L/opt/rocm-6.0.3/lib/rocprofiler -L/opt/rocm-6.0.3/lib/roctracer -lamdhip64'
           prepend_path:
-            LD_LIBRARY_PATH: /opt/cray/pe/pmi/6.1.12/lib
-            LIBRARY_PATH:  /appl/lumi/SW/CrayEnv/EB/rocm/5.6.1/lib:/appl/lumi/SW/CrayEnv/EB/rocm/5.6.1/lib64
-        extra_rpaths:
-        - /appl/lumi/SW/CrayEnv/EB/rocm/5.6.1/lib
-        - /appl/lumi/SW/CrayEnv/EB/rocm/5.6.1/lib64
-        - /opt/cray/pe/gcc-libs
+            LD_LIBRARY_PATH: /opt/rocm-6.0.3/lib:/opt/rocm-6.0.3/lib/rocprofiler:/opt/rocm-6.0.3/lib/roctracer
+            PKG_CONFIG_PATH: '/usr/lib64/pkgconfig'
+            PE_PKGCONFIG_LIBS: 'rocm-6.0.3'
+          append_path:
+            PE_PRODUCT_LIST: 'CRAY_ROCM'
 
