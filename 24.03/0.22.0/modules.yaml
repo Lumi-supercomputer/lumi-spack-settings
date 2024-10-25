@@ -22,7 +22,7 @@ modules:
     : - CMAKE_PREFIX_PATH
   default:
     roots:
-      tcl: $SPACK_USER_PREFIX/24.03/0.22.0/modules/tcl
+      tcl: $SPACK_USER_PREFIX/24.03/0.22.0/modules/tcl  # TODO: Remove tcl
       lmod: /users/radimjanalik/test/spack/spack-prefix/24.03/0.22.0/modules/lmod
     enable:
     - lmod
@@ -74,4 +74,5 @@ modules:
           gromacs +plumed: plumed
 
       core_compilers:
-      - gcc@=7.5.0
+      - gcc@13.2.1
+      - amdclang@6.0.3  # TODO: Probably remove
