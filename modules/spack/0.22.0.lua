@@ -11,7 +11,7 @@ whatis("Description: the Spack package manager configured to install in a user s
 
 family( 'LUMI_SoftwareStack' )
 
-local spackroot = "/appl/lumi/spack/" .. cpever .. "/" .. spackver
+local spackroot = "/appl/lumi/spack/"  .. spackver
 local userdir = os.getenv("SPACK_USER_PREFIX")
 
 require("lfs")
@@ -52,20 +52,20 @@ if mode() == "load" then
   end
 
   -- Check for the modules directory and try to create it
-  local moduledir = userdir .. "/" .. cpever .. "/" .. spackver .. "/modules/tcl"
+  local moduledir = userdir .. "/" .. spackver .. "/modules/tcl"
   if not isDir(moduledir) then
-    LmodMessage("Creating the Spack modules directory " .. (userdir .. "/" .. cpever .. "/" .. spackver .. "/modules/tcl"))
-    ok,_,_ = os.execute("mkdir -p " .. userdir .. "/" .. cpever .. "/" .. spackver .. "/modules/tcl")
+    LmodMessage("Creating the Spack modules directory " .. (userdir .. "/" .. spackver .. "/modules/tcl"))
+    ok,_,_ = os.execute("mkdir -p " .. userdir .. "/" .. spackver .. "/modules/tcl")
     if not ok then
       LmodError("The modules directory (" .. moduledir .. ") specified in $SPACK_USER_PREFIX does not exist and the Spack module tried to create it, but it did not work.")
     end
   end
 
   -- Check for the cache directory and try to create it
-  local cachedir = userdir .. "/" .. cpever .. "/" .. spackver .. "/cache"
+  local cachedir = userdir .. "/" .. spackver .. "/cache"
   if not isDir(cachedir) then
-    LmodMessage("Creating the Spack cache directory " .. (userdir .. "/" .. cpever .. "/" .. spackver .. "/cache"))
-    ok,_,_ = os.execute("mkdir -p " .. userdir .. "/" .. cpever .. "/" .. spackver .. "/cache")
+    LmodMessage("Creating the Spack cache directory " .. (userdir .. "/" .. spackver .. "/cache"))
+    ok,_,_ = os.execute("mkdir -p " .. userdir .. "/" .. spackver .. "/cache")
     if not ok then
       LmodError("The cache directory (" .. cachedir .. ") specified in $SPACK_USER_PREFIX does not exist and the Spack module tried to create it, but it did not work.")
     end
@@ -85,7 +85,7 @@ setenv("SPACK_ROOT",spackroot)
 setenv("SPACK_DISABLE_LOCAL_CONFIG","true")
 
 -- Add Spack's modules
-prepend_path("MODULEPATH",userdir .. "/" .. cpever .. "/" .. spackver .. "/modules/tcl/linux-sles15-zen")
-prepend_path("MODULEPATH",userdir .. "/" .. cpever .. "/" .. spackver .. "/modules/tcl/linux-sles15-zen2")
-prepend_path("MODULEPATH","/appl/lumi/spack/" .. cpever .. "/" .. spackver .. "/share/spack/modules/linux-sles15-zen")
-prepend_path("MODULEPATH","/appl/lumi/spack/" .. cpever .. "/" .. spackver .. "/share/spack/modules/linux-sles15-zen2")
+prepend_path("MODULEPATH",userdir .. "/" .. spackver .. "/modules/tcl/linux-sles15-zen")
+prepend_path("MODULEPATH",userdir .. "/" .. spackver .. "/modules/tcl/linux-sles15-zen2")
+prepend_path("MODULEPATH","/appl/lumi/spack/" .. spackver .. "/share/spack/modules/linux-sles15-zen")
+prepend_path("MODULEPATH","/appl/lumi/spack/" .. spackver .. "/share/spack/modules/linux-sles15-zen2")
