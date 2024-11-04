@@ -27,17 +27,23 @@ function isDir(name)
     return is
 end
 
+-- Check that $SPACK_USER_PREFIX is set
+if userdir == nil then
+  userdir = os.getenv("HOME") .. "/spack-prefix"
+  setenv("SPACK_USER_PREFIX", userdir)
+  LmodMessage("Environment variable $SPACK_USER_PREFIX is not set. Setting it to a default value " .. userdir .. ".")
+end
+
+-- Sanity check of the path
+if string.sub(userdir,1,11) == "/appl/lumi/" then
+  LmodError("You cannot set $SPACK_USER_PREFIX to somewhere in the /appl filesystem, because it is read-only.")
+end
+
+-- Set module and cache dir
+local moduledir = userdir .. "/" .. spackver .. "/modules/lmod"
+local cachedir = userdir .. "/" .. spackver .. "/cache"
+
 if mode() == "load" then
-  -- Check that $SPACK_USER_PREFIX is set
-  if userdir == nil then
-    LmodError("Please set $SPACK_USER_PREFIX to where you want to install Spack packages. We recommend using your project persistent storage for this. E.g. /project/project_<project-number>/spack")
-  end
-
-  -- Sanity check of the path
-  if string.sub(userdir,1,11) == "/appl/lumi/" then
-    LmodError("You cannot set $SPACK_USER_PREFIX to somewhere in the /appl filesystem, because it is read-only.")
-  end
-
   LmodMessage("$SPACK_USER_PREFIX = " .. userdir)
 
   -- Check that the install directory actually exists, create it otherwise
@@ -52,20 +58,18 @@ if mode() == "load" then
   end
 
   -- Check for the modules directory and try to create it
-  local moduledir = userdir .. "/" .. spackver .. "/modules/tcl"
   if not isDir(moduledir) then
-    LmodMessage("Creating the Spack modules directory " .. (userdir .. "/" .. spackver .. "/modules/tcl"))
-    ok,_,_ = os.execute("mkdir -p " .. userdir .. "/" .. spackver .. "/modules/tcl")
+    LmodMessage("Creating the Spack modules directory " .. moduledir)
+    ok,_,_ = os.execute("mkdir -p " .. moduledir)
     if not ok then
       LmodError("The modules directory (" .. moduledir .. ") specified in $SPACK_USER_PREFIX does not exist and the Spack module tried to create it, but it did not work.")
     end
   end
 
   -- Check for the cache directory and try to create it
-  local cachedir = userdir .. "/" .. spackver .. "/cache"
   if not isDir(cachedir) then
-    LmodMessage("Creating the Spack cache directory " .. (userdir .. "/" .. spackver .. "/cache"))
-    ok,_,_ = os.execute("mkdir -p " .. userdir .. "/" .. spackver .. "/cache")
+    LmodMessage("Creating the Spack cache directory " .. cachedir)
+    ok,_,_ = os.execute("mkdir -p " .. cachedir)
     if not ok then
       LmodError("The cache directory (" .. cachedir .. ") specified in $SPACK_USER_PREFIX does not exist and the Spack module tried to create it, but it did not work.")
     end
@@ -85,7 +89,5 @@ setenv("SPACK_ROOT",spackroot)
 setenv("SPACK_DISABLE_LOCAL_CONFIG","true")
 
 -- Add Spack's modules
-prepend_path("MODULEPATH",userdir .. "/" .. spackver .. "/modules/tcl/linux-sles15-zen")
-prepend_path("MODULEPATH",userdir .. "/" .. spackver .. "/modules/tcl/linux-sles15-zen2")
-prepend_path("MODULEPATH","/appl/lumi/spack/" .. spackver .. "/share/spack/modules/linux-sles15-zen")
-prepend_path("MODULEPATH","/appl/lumi/spack/" .. spackver .. "/share/spack/modules/linux-sles15-zen2")
+prepend_path("MODULEPATH",moduledir .. "/linux-sles15-zen")
+prepend_path("MODULEPATH",moduledir .. "/linux-sles15-zen2")
