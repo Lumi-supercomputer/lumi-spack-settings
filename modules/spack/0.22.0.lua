@@ -91,3 +91,6 @@ setenv("SPACK_DISABLE_LOCAL_CONFIG","true")
 -- Add Spack's modules
 prepend_path("MODULEPATH",moduledir .. "/linux-sles15-zen")
 prepend_path("MODULEPATH",moduledir .. "/linux-sles15-zen2")
+
+-- Source Spack setup-env script
+execute{cmd="source " .. spackroot .. "/share/spack/setup-env.sh", modeA={"load"}}
