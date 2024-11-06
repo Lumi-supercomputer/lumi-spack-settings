@@ -6,6 +6,7 @@ config:
         all: '{name}-{version}-{hash:7}'
     source_cache: $SPACK_USER_PREFIX/0.22.0/cache
     misc_cache: $SPACK_USER_PREFIX/0.22.0/cache
+    environments_root: $SPACK_USER_PREFIX/0.22.0/environments
     install_missing_compilers: false
     suppress_gpg_warnings: true
     build_language: C
