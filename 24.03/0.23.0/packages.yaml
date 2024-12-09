@@ -1,0 +1,275 @@
+packages:
+  all:
+    compiler: [gcc@13.2.1]
+    target: [zen3]
+    providers:
+      mpi: [cray-mpich@8.1.29]
+      blas: [openblas,cray-libsci@24.03.0]
+      lapack: [openblas,cray-libsci@24.03.0]
+      scalapack: [netlib-scalapack,cray-libsci@24.03.0]
+  gcc-runtime:
+    externals:
+    - spec: gcc-runtime@13.2.1
+      prefix: /usr/lib64/gcc/x86_64-suse-linux/13/
+    buildable: false
+  pkg-config:
+    externals:
+    - spec: pkg-config@0.29.2
+      prefix: /usr
+    buildable: false
+  cray-mpich:
+    externals:
+    - spec: cray-mpich@8.1.29%gcc
+      prefix: /opt/cray/pe/mpich/8.1.29/ofi/gnu/12.3
+      modules:
+      - libfabric/1.15.2.0
+    - spec: cray-mpich@8.1.29%cce
+      prefix: /opt/cray/pe/mpich/8.1.29/ofi/crayclang/17.0
+      modules:
+      - libfabric/1.15.2.0
+    - spec: cray-mpich@8.1.29%rocmcc
+      prefix: /opt/cray/pe/mpich/8.1.29/ofi/amd/5.0
+      modules:
+      - libfabric/1.15.2.0
+    buildable: false
+  libfabric:
+    externals:
+    - spec: libfabric@1.15.2.0 fabrics=cxi
+      prefix: /opt/cray/libfabric/1.15.2.0
+      modules:
+      - libfabric/1.15.2.0
+    buildable: false
+  libpciaccess:
+    externals:
+    - spec: libpciaccess@0.11.1
+      prefix: /usr
+    buildable: false
+  cray-libsci:
+    externals:
+    - spec: cray-libsci@24.03.0%gcc
+      prefix: /opt/cray/pe/libsci/24.03.0/gnu/12.3/x86_64
+      modules:
+      - cray-libsci/24.03.0
+    - spec: cray-libsci@24.03.0%cce
+      prefix: /opt/cray/pe/libsci/24.03.0/cray/17.0/x86_64
+      modules:
+      - cray-libsci/24.03.0
+    - spec: cray-libsci@24.03.0%rocmcc
+      prefix: /opt/cray/pe/libsci/24.03.0/amd/5.0/x86_64
+      modules:
+      - cray-libsci/24.03.0
+    buildable: false
+  hdf5:
+    externals:
+    - spec: hdf5@1.12.2+mpi
+      modules:
+      - cray-hdf5-parallel/1.12.2.11
+  netcdf-c:
+    externals:
+    - spec: netcdf-c@4.9.0+mpi+parallel-netcdf
+      modules:
+      - cray-netcdf-hdf5parallel/4.9.0.11
+  netcdf-fortran:
+    externals:
+    - spec: netcdf-fortran@4.9.0
+      modules:
+      - cray-netcdf-hdf5parallel/4.9.0.11
+  fftw:
+    externals:
+    - spec: fftw@3.3.10
+      prefix: /opt/cray/pe/fftw/3.3.10.7/x86_rome
+      modules:
+      - cray-fftw/3.3.10.7
+  gcc:
+    externals:
+    - spec: gcc@7.5.0 languages=c,c++,fortran
+      prefix: /usr
+      extra_attributes:
+        compilers:
+          c: /usr/bin/gcc
+          cxx: /usr/bin/g++-7
+          fortran: /usr/bin/gfortran
+  slurm:
+    externals:
+    - spec: slurm@23.02.7+cgroup
+      prefix: /usr
+    buildable: false
+  gmake:
+    externals:
+    - spec: gmake@4.2.1%gcc
+      prefix: /usr
+  cmake:
+    externals:
+    - spec: cmake@3.20.4%gcc
+      prefix: /usr
+  comgr:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: comgr@6.0.3
+  hip:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3/hip
+      spec: hip@6.0.3
+  hip-rocclr:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3/rocclr
+      spec: hip-rocclr@6.0.3
+  hipblas:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: hipblas@6.0.3
+  hipcub:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: hipcub@6.0.3
+  hipfft:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: hipfft@6.0.3
+  hipfort:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: hipfort@6.0.3
+  hipify-clang:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: hipify-clang@6.0.3
+  hipsparse:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: hipsparse@6.0.3
+  hsa-rocr-dev:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: hsa-rocr-dev@6.0.3
+  hsakmt-roct:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: hsakmt-roct@6.0.3
+  llvm-amdgpu:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3/llvm
+      spec: llvm-amdgpu@6.0.3
+  rccl:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: rccl@6.0.3
+  rocalution:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: rocalution@6.0.3
+  rocblas:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: rocblas@6.0.3
+  rocfft:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: rocfft@6.0.3
+    variants: amdgpu_target=auto amdgpu_target_sram_ecc=auto
+  rocm-clang-ocl:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: rocm-clang-ocl@6.0.3
+  rocm-cmake:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: rocm-cmake@6.0.3
+  rocm-device-libs:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: rocm-device-libs@6.0.3
+  rocm-gdb:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: rocm-gdb@6.0.3
+  rocm-opencl:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3/opencl
+      spec: rocm-opencl@6.0.3
+  rocm-opencl-runtime:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3/opencl
+      spec: rocm-opencl-runtime@6.0.3
+  rocm-openmp-extras:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3/llvm
+      spec: rocm-openmp-extras@6.0.3
+  rocm-smi:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3/rocm_smi
+      spec: rocmsmi@6.0.3
+  rocm-smi-lib:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3/rocm_smi
+      spec: rocm-smi-lib@6.0.3
+  rocminfo:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: rocminfo@6.0.3
+  rocprim:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: rocprim@6.0.3
+  rocprofiler-dev:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: rocprofiler-dev@6.0.3
+  rocrand:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: rocrand@6.0.3
+  rocsolver:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: rocsolver@6.0.3
+  rocsparse:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: rocsparse@6.0.3
+  rocthrust:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: rocthrust@6.0.3
+  roctracer-dev:
+    buildable: false
+    externals:
+    - prefix: /opt/rocm-6.0.3
+      spec: roctracer-dev@6.0.3
+  openssl:
+    buildable: false
+    externals:
+    - prefix: /usr
+      spec: openssl@1.1.1l-fips

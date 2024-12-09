@@ -1,0 +1,56 @@
+compilers:
+  - compiler:
+      spec: gcc@7.5.0
+      paths:
+        cc: /usr/bin/gcc
+        cxx: /usr/bin/g++
+        f77: /usr/bin/gfortran
+        fc: /usr/bin/gfortran
+      flags: {}
+      operating_system: sles15
+      target: any
+      modules: []
+      environment:
+        append_path:
+          PKG_CONFIG_PATH: /usr/lib64/pkgconfig
+      extra_rpaths: []
+  - compiler:
+      spec: gcc@13.2.1
+      paths:
+        cc: /opt/cray/pe/craype/2.7.31.11/bin/cc
+        cxx: /opt/cray/pe/craype/2.7.31.11/bin/CC
+        f77: /opt/cray/pe/craype/2.7.31.11/bin/ftn
+        fc: /opt/cray/pe/craype/2.7.31.11/bin/ftn
+      flags: {}
+      operating_system: sles15
+      target: any
+      modules: 
+      - PrgEnv-gnu
+      - gcc-native/13.2
+      environment:
+        prepend_path:
+          PKG_CONFIG_PATH: /usr/lib64/pkgconfig
+      extra_rpaths: []
+  - compiler:
+      spec: cce@17.0.1
+      paths:
+        cc: /opt/cray/pe/cce/17.0.1/bin/craycc
+        cxx: /opt/cray/pe/cce/17.0.1/bin/crayCC
+        f77: /opt/cray/pe/cce/17.0.1/bin/crayftn
+        fc: /opt/cray/pe/cce/17.0.1/bin/crayftn
+      flags: {}
+      operating_system: sles15
+      target: any
+      modules: []
+  - compiler:
+        spec: rocmcc@6.0.3
+        paths:
+          cc:  /opt/rocm-6.0.3/bin/amdclang
+          cxx: /opt/rocm-6.0.3/bin/amdclang++
+          f77: /opt/rocm-6.0.3/bin/amdflang
+          fc:  /opt/rocm-6.0.3/bin/amdflang
+        flags: {}
+        operating_system: sles15
+        target: any
+        modules: [rocm]
+
