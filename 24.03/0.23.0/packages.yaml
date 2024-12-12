@@ -7,6 +7,7 @@ packages:
       blas: [openblas,cray-libsci@24.03.0]
       lapack: [openblas,cray-libsci@24.03.0]
       scalapack: [netlib-scalapack,cray-libsci@24.03.0]
+      pkgconfig: [pkg-config]
   gcc-runtime:
     externals:
     - spec: gcc-runtime@13.2.1
@@ -32,12 +33,26 @@ packages:
       modules:
       - libfabric/1.15.2.0
     buildable: false
+  cray-pmi:
+    externals:
+    - spec: cray-pmi@6.1.14
+      prefix: /opt/cray/pe/pmi/6.1.14
+      modules:
+      - cray-pmi/6.1.4
+    buildable: false
   libfabric:
     externals:
     - spec: libfabric@1.15.2.0 fabrics=cxi
       prefix: /opt/cray/libfabric/1.15.2.0
       modules:
       - libfabric/1.15.2.0
+    buildable: false
+  xpmem:
+    externals:
+    - spec: xpmem@2.8.2-1.0_5.1__g84a27a5.shasta
+      prefix: /opt/cray/xpmem/2.8.2-1.0_5.1__g84a27a5.shasta/
+      modules:
+      - xpmem/2.8.2-1.0_5.1__g84a27a5.shasta
     buildable: false
   libpciaccess:
     externals:
@@ -110,7 +125,7 @@ packages:
   hip:
     buildable: false
     externals:
-    - prefix: /opt/rocm-6.0.3/hip
+    - prefix: /opt/rocm-6.0.3
       spec: hip@6.0.3
   hip-rocclr:
     buildable: false
@@ -182,7 +197,7 @@ packages:
     externals:
     - prefix: /opt/rocm-6.0.3
       spec: rocfft@6.0.3
-    variants: amdgpu_target=auto amdgpu_target_sram_ecc=auto
+    variants: amdgpu_target=gfx90a amdgpu_target_sram_ecc=auto
   rocm-clang-ocl:
     buildable: false
     externals:
@@ -271,5 +286,25 @@ packages:
   openssl:
     buildable: false
     externals:
-    - prefix: /usr
-      spec: openssl@1.1.1l-fips
+    - spec: openssl@1.1.1l-fips
+      prefix: /usr
+  findutils:
+    externals:
+    - spec: findutils@4.8.0
+      prefix: /usr
+  m4:
+    externals:
+    - spec: m4@1.4.18
+      prefix: /usr
+  autoconf:
+    externals:
+    - spec: autoconf@2.69
+      prefix: /usr
+  automake:
+    externals:
+    - spec: automake@1.15.1
+      prefix: /usr
+  libtool:
+    externals:
+    - spec: libtool@2.4.6
+      prefix: /usr
