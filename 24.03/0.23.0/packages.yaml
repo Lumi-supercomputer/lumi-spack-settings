@@ -23,14 +23,17 @@ packages:
     - spec: cray-mpich@8.1.29%gcc
       prefix: /opt/cray/pe/mpich/8.1.29/ofi/gnu/12.3
       modules:
+      - cray-mpich/8.1.29
       - libfabric/1.15.2.0
     - spec: cray-mpich@8.1.29%cce
       prefix: /opt/cray/pe/mpich/8.1.29/ofi/crayclang/17.0
       modules:
+      - cray-mpich/8.1.29
       - libfabric/1.15.2.0
     - spec: cray-mpich@8.1.29%rocmcc
       prefix: /opt/cray/pe/mpich/8.1.29/ofi/amd/5.0
       modules:
+      - cray-mpich/8.1.29
       - libfabric/1.15.2.0
     buildable: false
   cray-pmi:
