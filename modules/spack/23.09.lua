@@ -81,8 +81,17 @@ setenv("SPACK_ROOT",spackroot)
 -- Override the user settings in the home directory
 setenv("SPACK_DISABLE_LOCAL_CONFIG","true")
 
--- Add Spack's modules
-prepend_path("MODULEPATH",userdir .. "/23.09/0.21.0/modules/tcl/linux-sles15-zen")
-prepend_path("MODULEPATH",userdir .. "/23.09/0.21.0/modules/tcl/linux-sles15-zen2")
-prepend_path("MODULEPATH","/appl/lumi/spack/23.09/0.21.0/share/spack/modules/linux-sles15-zen")
-prepend_path("MODULEPATH","/appl/lumi/spack/23.09/0.21.0/share/spack/modules/linux-sles15-zen2")
+-- Check the spider mode
+local full_spider = os.getenv( 'LUMI_FULL_SPIDER' ) or 0
+
+-- Only make the MODULEPATH change visible to LMOD when loading, unloading or 
+-- showing a module to avoid interfereing with, e.g., module spider.
+-- With the exception that it can always be make visible to LMOD if 
+-- specifically requested through criteria coded in SitePackage.lua.
+if mode() == 'load' or mode() == 'unload' or mode() == 'show' or is_full_spider() then
+  -- Add Spack's modules
+  prepend_path("MODULEPATH",userdir .. "/23.09/0.21.0/modules/tcl/linux-sles15-zen")
+  prepend_path("MODULEPATH",userdir .. "/23.09/0.21.0/modules/tcl/linux-sles15-zen2")
+  prepend_path("MODULEPATH","/appl/lumi/spack/23.09/0.21.0/share/spack/modules/linux-sles15-zen")
+  prepend_path("MODULEPATH","/appl/lumi/spack/23.09/0.21.0/share/spack/modules/linux-sles15-zen2")
+end
