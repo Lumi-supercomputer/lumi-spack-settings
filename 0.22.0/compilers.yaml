@@ -1,0 +1,185 @@
+compilers:
+  - compiler:
+      spec: gcc@7.5.0
+      paths:
+        cc: /usr/bin/gcc
+        cxx: /usr/bin/g++
+        f77: /usr/bin/gfortran
+        fc: /usr/bin/gfortran
+      flags: {}
+      operating_system: sles15
+      target: any
+      modules: []
+      environment:
+        append_path:
+          PKG_CONFIG_PATH: /usr/lib64/pkgconfig
+      extra_rpaths: []
+  - compiler:
+      spec: gcc@12.3.0
+      paths:
+        cc: /usr/bin/gcc-12
+        cxx: /usr/bin/g++-12
+        f77: /usr/bin/gfortran-12
+        fc: /usr/bin/gfortran-12
+      flags: {}
+      operating_system: sles15
+      target: any
+      modules: []
+      environment:
+        append_path:
+          PKG_CONFIG_PATH: /usr/lib64/pkgconfig
+      extra_rpaths: []
+  - compiler:
+      spec: gcc@13.2.1
+      paths:
+        cc: /usr/bin/gcc-13
+        cxx: /usr/bin/g++-13
+        f77: /usr/bin/gfortran-13
+        fc: /usr/bin/gfortran-13
+      flags: {}
+      operating_system: sles15
+      target: any
+      modules: []
+      environment:
+        append_path:
+          PKG_CONFIG_PATH: /usr/lib64/pkgconfig
+      extra_rpaths: []
+  - compiler:
+      spec: gcc@11.2.0
+      paths:
+        cc: /opt/cray/pe/gcc/11.2.0/bin/gcc
+        cxx: /opt/cray/pe/gcc/11.2.0/bin/g++
+        f77: /opt/cray/pe/gcc/11.2.0/bin/gfortran
+        fc: /opt/cray/pe/gcc/11.2.0/bin/gfortran
+      flags: {}
+      operating_system: sles15
+      target: any
+      modules: []
+      environment:
+        prepend_path:
+          LD_LIBRARY_PATH: /opt/cray/pe/pmi/6.1.12/lib:/opt/cray/libfabric/1.15.2.0/lib64
+          PKG_CONFIG_PATH: /usr/lib64/pkgconfig
+      extra_rpaths: []
+  - compiler:
+      spec: gcc@12.2.0
+      paths:
+        cc: /opt/cray/pe/gcc/12.2.0/bin/gcc
+        cxx: /opt/cray/pe/gcc/12.2.0/bin/g++
+        f77: /opt/cray/pe/gcc/12.2.0/bin/gfortran
+        fc: /opt/cray/pe/gcc/12.2.0/bin/gfortran
+      flags: {}
+      operating_system: sles15
+      target: any
+      modules: []
+      environment:
+        prepend_path:
+          LD_LIBRARY_PATH: /opt/cray/pe/pmi/6.1.12/lib:/opt/cray/libfabric/1.15.2.0/lib64
+          PKG_CONFIG_PATH: /usr/lib64/pkgconfig
+      extra_rpaths: []
+  - compiler:
+      spec: cce@14.0.2
+      paths:
+        cc: /opt/cray/pe/cce/14.0.2/bin/craycc
+        cxx: /opt/cray/pe/cce/14.0.2/bin/crayCC
+        f77: /opt/cray/pe/cce/14.0.2/bin/crayftn
+        fc: /opt/cray/pe/cce/14.0.2/bin/crayftn
+      flags: {}
+      operating_system: sles15
+      target: any
+      modules: []
+      environment:
+        set:
+          RFE_811452_DISABLE: '1'
+        prepend_path:
+          LD_LIBRARY_PATH: /opt/cray/pe/pmi/6.1.12/lib
+        append_path:
+          LD_LIBRARY_PATH: /opt/cray/pe/gcc-libs
+          PKG_CONFIG_PATH: /usr/lib64/pkgconfig
+      extra_rpaths:
+      - /opt/cray/pe/gcc-libs
+  - compiler:
+      spec: cce@15.0.1
+      paths:
+        cc: /opt/cray/pe/cce/15.0.1/bin/craycc
+        cxx: /opt/cray/pe/cce/15.0.1/bin/crayCC
+        f77: /opt/cray/pe/cce/15.0.1/bin/crayftn
+        fc: /opt/cray/pe/cce/15.0.1/bin/crayftn
+      flags: {}
+      operating_system: sles15
+      target: any
+      modules: []
+      environment:
+        set:
+          RFE_811452_DISABLE: '1'
+        prepend_path:
+          LD_LIBRARY_PATH: /opt/cray/pe/pmi/6.1.12/lib
+        append_path:
+          LD_LIBRARY_PATH: /opt/cray/pe/gcc-libs
+          PKG_CONFIG_PATH: /usr/lib64/pkgconfig
+      extra_rpaths:
+      - /opt/cray/pe/gcc-libs
+  - compiler:
+      spec: cce@16.0.1
+      paths:
+        cc: /opt/cray/pe/cce/16.0.1/bin/craycc
+        cxx: /opt/cray/pe/cce/16.0.1/bin/crayCC
+        f77: /opt/cray/pe/cce/16.0.1/bin/crayftn
+        fc: /opt/cray/pe/cce/16.0.1/bin/crayftn
+      flags: {}
+      operating_system: sles15
+      target: any
+      modules: []
+      environment:
+        set:
+          RFE_811452_DISABLE: '1'
+        prepend_path:
+          LD_LIBRARY_PATH: /opt/cray/pe/pmi/6.1.12/lib
+        append_path:
+          LD_LIBRARY_PATH: /opt/cray/pe/gcc-libs
+          PKG_CONFIG_PATH: /usr/lib64/pkgconfig
+      extra_rpaths:
+      - /opt/cray/pe/gcc-libs
+  - compiler:
+      spec: cce@17.0.1
+      paths:
+        cc: /opt/cray/pe/cce/17.0.1/bin/craycc
+        cxx: /opt/cray/pe/cce/17.0.1/bin/crayCC
+        f77: /opt/cray/pe/cce/17.0.1/bin/crayftn
+        fc: /opt/cray/pe/cce/17.0.1/bin/crayftn
+      flags: {}
+      operating_system: sles15
+      target: any
+      modules: []
+      environment:
+        set:
+          RFE_811452_DISABLE: '1'
+        prepend_path:
+          LD_LIBRARY_PATH: /opt/cray/pe/pmi/6.1.12/lib
+        append_path:
+          LD_LIBRARY_PATH: /opt/cray/pe/gcc-libs
+          PKG_CONFIG_PATH: /usr/lib64/pkgconfig
+      extra_rpaths:
+      - /opt/cray/pe/gcc-libs
+  - compiler:
+        spec: amdclang@6.0.3
+        paths:
+          cc:  /opt/rocm-6.0.3/bin/amdclang
+          cxx: /opt/rocm-6.0.3/bin/amdclang++
+          f77: /opt/rocm-6.0.3/bin/amdflang
+          fc:  /opt/rocm-6.0.3/bin/amdflang
+        flags: {}
+        operating_system: sles15
+        target: any
+        modules: []
+        environment:
+          set:
+            RFE_811452_DISABLE: '1'
+            CRAY_ROCM_INCLUDE_OPTS: '-I/opt/rocm-6.0.3/include -I/opt/rocm-6.0.3/include/rocprofiler -I/opt/rocm-6.0.3/include/roctracer -I/opt/rocm-6.0.3/include/hip -D__HIP_PLATFORM_AMD__'
+            CRAY_ROCM_POST_LINK_OPTS: ' -L/opt/rocm-6.0.3/lib -L/opt/rocm-6.0.3/lib/rocprofiler -L/opt/rocm-6.0.3/lib/roctracer -lamdhip64'
+          prepend_path:
+            LD_LIBRARY_PATH: /opt/rocm-6.0.3/lib:/opt/rocm-6.0.3/lib/rocprofiler:/opt/rocm-6.0.3/lib/roctracer
+            PKG_CONFIG_PATH: '/usr/lib64/pkgconfig'
+            PE_PKGCONFIG_LIBS: 'rocm-6.0.3'
+          append_path:
+            PE_PRODUCT_LIST: 'CRAY_ROCM'
+
