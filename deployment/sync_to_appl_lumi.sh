@@ -1,14 +1,16 @@
 #!/bin/bash
 #
-# Sync staged trees from a working area (expected: /flash on uan06) to
-# /appl/lumi/ on lustrep[1-4].
+# Sync tested trees from uan06 (TDS), where /appl/lumi is a test filesystem,
+# to /appl/lumi/ on lustrep[1-4].
 #
 # Usage:
 #     sync_to_appl_lumi.sh [staging-root]
 #
 # With no argument, the staging root is derived as the parent of the repo
-# this script lives in, and is required to start with /flash/. Pass an
-# explicit path to override (e.g. for testing against a fake staging tree).
+# this script lives in (/appl/lumi on uan06). Pass an explicit path to
+# override (e.g. for testing against a fake staging tree). Either way, a
+# staging root that is itself a destination is refused: on any node but
+# uan06, /appl/lumi is production itself.
 #
 # Auto-discovers under the staging root:
 #     lumi-spack-settings/   ->  <dest>/lumi-spack-settings/
@@ -30,14 +32,6 @@ if [[ $# -eq 1 ]]; then
 else
     script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     staging_root="$(cd "$script_dir/../.." && pwd)"
-    if [[ "$staging_root" != /flash/* ]]; then
-        cat >&2 <<EOF
-Script is at $script_dir/$(basename "${BASH_SOURCE[0]}").
-Refusing to auto-derive staging from a non-/flash location ($staging_root).
-Pass an explicit staging root if you really mean it.
-EOF
-        exit 2
-    fi
 fi
 
 [[ -d "$staging_root" ]] || { echo "Not a directory: $staging_root" >&2; exit 2; }
@@ -48,6 +42,19 @@ destinations=(
     /pfs/lustrep3/appl/lumi
     /pfs/lustrep4/appl/lumi
 )
+
+# device:inode identifies the directory itself, whatever path reaches it.
+staging_id="$(stat -L -c %d:%i "$staging_root")"
+for dest in "${destinations[@]}"; do
+    if [[ "$(stat -L -c %d:%i "$dest" 2>/dev/null)" == "$staging_id" ]]; then
+        cat >&2 <<EOF
+Staging root $staging_root is the same directory as $dest.
+Refusing to sync production onto itself; run this on uan06.
+EOF
+        exit 2
+    fi
+done
+
 preview_dest="${destinations[0]}"
 preview_short="${preview_dest#/pfs/}"; preview_short="${preview_short%%/*}"
 
