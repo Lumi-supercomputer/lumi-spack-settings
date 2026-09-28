@@ -19,7 +19,7 @@ This repository contains the configuration for the central Spack instance under 
 └── spack-buildcache/            # binary build cache (filesystem mirror)
 ```
 
-Lmod is configured (outside this repo, in the LUMI base setup) to find modulefiles under `/appl/lumi/lumi-spack-settings/modules/`.
+Lmod reaches these modulefiles through per-module directory symlinks from the LUMI module tree (`/appl/lumi/modules/SoftwareStack/spack-{cpu,gpu}` -> `/appl/lumi/lumi-spack-settings/modules/spack-{cpu,gpu}`), maintained outside this repo. Because of those symlinks the modulefile's load path does not locate the repo, so `lib/spack-module.lua` uses a fixed root, `/appl/lumi/lumi-spack-settings`, overridable with `LUMI_SPACK_SETTINGS_ROOT`.
 
 ## User-facing usage
 
@@ -206,6 +206,16 @@ done
 ### Verifying the deploy
 
 Run through the usage examples above with `SPACK_USER_PREFIX` pointed at a scratch location (e.g. `/scratch/<project>/<user>/spack-test`) to confirm the deploy is healthy.
+
+To test before deploying, use uan06 (TDS): there `/appl/lumi` is a test filesystem, not production, so a checkout at `/appl/lumi/lumi-spack-settings` is exercised at its deployed path with the plain `module load`.
+
+To test a checkout in a different location, point both roots at it:
+
+```bash
+export LUMI_SPACK_SETTINGS_ROOT=/scratch/<project>/<user>/lumi-spack-settings
+module use $LUMI_SPACK_SETTINGS_ROOT/modules
+module load spack-gpu/<ver>
+```
 
 ## Verifying configuration
 
