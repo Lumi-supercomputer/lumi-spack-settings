@@ -3,9 +3,9 @@
 
 local lfs = require("lfs")
 
--- Fixed, not derived from myFileName(): other module trees reach this file
--- through symlinks, so its load path doesn't locate the repo. Testing uses
--- the same path: on uan06 (TDS) /appl/lumi is a test filesystem, not production.
+-- Repo location: the deployed path, or LUMI_SPACK_SETTINGS_ROOT for a checkout
+-- elsewhere. Hardcoded because Lmod may reach this file through symlinks from
+-- other module trees, so the load path doesn't point into the repo.
 local repo_root = os.getenv("LUMI_SPACK_SETTINGS_ROOT") or "/appl/lumi/lumi-spack-settings"
 
 local name    = myModuleName()
