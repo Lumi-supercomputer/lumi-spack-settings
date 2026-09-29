@@ -1,14 +1,10 @@
 -- Shared implementation; modules/spack-{cpu,gpu}/<version>.lua are symlinks
--- here. Partition comes from myModuleName(), version from myModuleVersion(),
--- repo_root from myFileName() (the symlink path Lmod loaded).
+-- here. Partition comes from myModuleName(), version from myModuleVersion().
 
 local lfs = require("lfs")
 
-local modulefile = myFileName()
-local repo_root  = modulefile:match("(.*)/modules/[^/]+/[^/]+%.lua$")
-if not repo_root then
-    LmodError("Could not derive repo_root from modulefile path: " .. modulefile)
-end
+-- Repo location: the deployed path, or LUMI_SPACK_SETTINGS_ROOT for a checkout elsewhere.
+local repo_root = os.getenv("LUMI_SPACK_SETTINGS_ROOT") or "/appl/lumi/lumi-spack-settings"
 
 local name    = myModuleName()
 local version = myModuleVersion()
@@ -21,8 +17,7 @@ if not partition then
 end
 
 -- Spack source clones live outside this repo at /appl/lumi/spack-<version>;
--- configs live alongside this file so a maintainer can test from a checkout
--- (`module use <clone>/modules`) before deploying.
+-- configs live in the repo, under $LUMI_SPACK_SETTINGS_ROOT.
 local spack_root  = "/appl/lumi/spack-" .. version
 local config_root = pathJoin(repo_root, "configs")
 
