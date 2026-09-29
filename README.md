@@ -23,10 +23,10 @@ Lmod reaches these modulefiles through per-module directory symlinks from the LU
 
 ## User-facing usage
 
-Load one of the Spack modules (e.g. `spack-gpu/1.1`). They share the `LUMI_SoftwareStack` Lmod family, so they are mutually exclusive and also conflict with the LUMI software stack — pick one per session:
+Load one of the Spack modules (e.g. `spack-gpu/1.2`). They share the `LUMI_SoftwareStack` Lmod family, so they are mutually exclusive and also conflict with the LUMI software stack — pick one per session:
 
 ```bash
-module load spack-cpu/1.1        # or spack-gpu/1.1
+module load spack-cpu/1.2        # or spack-gpu/1.2
 ```
 
 `SPACK_USER_PREFIX` controls where the user's installs and generated modules land. It defaults to `$HOME/spack-prefix` and can be set before loading the module to point elsewhere (e.g. `/scratch/<project>/<user>/spack`).
@@ -125,7 +125,7 @@ All edits happen in the testing area, `/appl/lumi/` on uan06 (see [Deployment](#
        https://github.com/spack/spack.git spack-<new>
    ```
 
-   A release branch (e.g. `releases/v1.1`) tracks every patch release for that minor version, so future patch updates are `git -C /appl/lumi/spack-<new> pull` on uan06 followed by another deploy — no re-clone, no module rename.
+   A release branch (e.g. `releases/v1.2`) tracks every patch release for that minor version, so future patch updates are `git -C /appl/lumi/spack-<new> pull` on uan06 followed by another deploy — no re-clone, no module rename.
 
 2. In the uan06 copy of this repo, add the modulefile symlinks under both partitions:
 
@@ -169,8 +169,8 @@ Two-step workflow: set up and test on uan06, then run the deploy script. On uan0
    umask 002
    cd /appl/lumi
    git clone https://github.com/Lumi-supercomputer/lumi-spack-settings.git
-   git clone --depth 1 --branch releases/v1.1 \
-       https://github.com/spack/spack.git spack-1.1
+   git clone --depth 1 --branch releases/v1.2 \
+       https://github.com/spack/spack.git spack-1.2
    ```
 
    Multiple `spack-<ver>/` clones can coexist when several Spack versions are supported in parallel.
@@ -185,7 +185,7 @@ Two-step workflow: set up and test on uan06, then run the deploy script. On uan0
 
    `spack-buildcache/` is not in scope — see [Pushing to the build cache](#pushing-to-the-build-cache).
 
-Patch updates: `git -C /appl/lumi/spack-1.1 pull` on uan06, then re-run the deploy script.
+Patch updates: `git -C /appl/lumi/spack-1.2 pull` on uan06, then re-run the deploy script.
 
 ### Permissions
 
