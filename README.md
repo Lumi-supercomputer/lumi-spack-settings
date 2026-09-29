@@ -19,7 +19,7 @@ This repository contains the configuration for the central Spack instance under 
 └── spack-buildcache/            # binary build cache (filesystem mirror)
 ```
 
-Lmod reaches these modulefiles through per-module directory symlinks from the LUMI module tree (`/appl/lumi/modules/SoftwareStack/spack-{cpu,gpu}` -> `/appl/lumi/lumi-spack-settings/modules/spack-{cpu,gpu}`), maintained outside this repo. Because of those symlinks the modulefile's load path does not locate the repo, so `lib/spack-module.lua` uses a fixed root, `/appl/lumi/lumi-spack-settings`, overridable with `LUMI_SPACK_SETTINGS_ROOT`.
+Lmod reaches these modulefiles through per-module directory symlinks from the LUMI module tree (`/appl/lumi/modules/SoftwareStack/spack-{cpu,gpu}` -> `/appl/lumi/lumi-spack-settings/modules/spack-{cpu,gpu}`), maintained outside this repo. `lib/spack-module.lua` reads configs from `/appl/lumi/lumi-spack-settings`, overridable with `LUMI_SPACK_SETTINGS_ROOT`.
 
 ## User-facing usage
 
