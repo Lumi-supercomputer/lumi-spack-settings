@@ -96,7 +96,7 @@ This requires edits in **two** files. There is no automation, by design.
 
 1. **Add the external in `configs/common/packages.yaml`** under the appropriate compiler key (`gcc`, `cce`, etc.). Include `extra_attributes.compilers` with the c/cxx/fortran paths. (For a GPU-only compiler like `llvm-amdgpu`, add it to `configs/partition-g/packages.yaml` instead.)
 2. **Add the same compiler spec to `configs/common/modules.yaml` under `core_compilers:`**. If you skip this step, modules built with the new compiler will land in `<compiler>/<version>/` instead of `Core/`, breaking the one-shot `module load` UX.
-3. If it should become the new default compiler, update `packages:all:prefer: ['%gcc@X.Y.Z']` in `configs/common/packages.yaml` to point at the new version.
+3. If it should become the new default compiler, update the `prefer:` entries under `packages:c:`, `packages:cxx:` and `packages:fortran:` in `configs/common/packages.yaml` to point at the new version.
 
 The `core_compilers` list silently ignores compilers that aren't installed, so listing the GPU compiler in the common modules.yaml is harmless on the CPU partition.
 
@@ -106,7 +106,7 @@ Reverse of above:
 
 1. Remove the external block from `configs/common/packages.yaml` (or `configs/partition-g/packages.yaml` for `llvm-amdgpu`).
 2. Remove the spec from `configs/common/modules.yaml` core_compilers (optional — leaving a dead entry is harmless, but keep the list tidy).
-3. If it was the default compiler (`packages:all:prefer: ['%gcc@X.Y.Z']` in `configs/common/packages.yaml`), update the prefer line to a still-installed version.
+3. If it was the default compiler (the `prefer:` entries under `packages:c:`, `packages:cxx:` and `packages:fortran:` in `configs/common/packages.yaml`), point them at a still-installed version.
 
 ### Adding a ROCm package (GPU partition)
 
@@ -155,7 +155,7 @@ Single cache for both partitions — hash-based matching prevents cross-architec
 
 ### Default compiler / variants
 
-- Default compiler: set via `packages:all:prefer: ['%gcc@X.Y.Z']` in `configs/common/packages.yaml`. Soft preference — users can override with `%cce` or `%llvm-amdgpu` per spec.
+- Default compiler: set via `prefer: [gcc@X.Y.Z]` on the `c`, `cxx` and `fortran` virtuals in `configs/common/packages.yaml`. Soft preference — users can override with `%cce` or `%llvm-amdgpu` per spec.
 - Default variants: hard `packages:all:require:` in the relevant partition file. The GPU partition currently has `[target=zen3, '+rocm amdgpu_target=gfx90a']` in `configs/partition-g/packages.yaml`. Soft `variants:` and `prefer:` don't override package defaults reliably in 1.1.
 - Provider preferences: `packages:all:providers:` in `configs/common/packages.yaml` (currently `blas: [openblas]`, `lapack: [openblas]`, `mpi: [mpich, openmpi]`).
 
