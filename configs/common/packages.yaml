@@ -2,12 +2,18 @@ packages:
   all:
     require:
       - target=zen3
-    prefer:
-      - '%gcc@14.3.0'
     providers:
       blas: [openblas]
       lapack: [openblas]
       mpi: [mpich, openmpi]
+
+  # Default compiler: preferred provider of the language virtuals.
+  c:
+    prefer: [gcc@14.3.0]
+  cxx:
+    prefer: [gcc@14.3.0]
+  fortran:
+    prefer: [gcc@14.3.0]
 
   # Compilers
   gcc:
